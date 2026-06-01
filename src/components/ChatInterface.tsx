@@ -182,42 +182,47 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onComplete, isLoad
   const chips = getChipsForStep(step);
 
   return (
-    <div className="flex flex-col h-full bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/20">
+    <div className="flex flex-col h-full bg-white rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-hidden border border-[#e2e8f0]">
       {/* Header */}
-      <div className="bg-white/10 backdrop-blur-md p-4 text-white flex items-center shadow-md border-b border-white/10">
-        <Bot className="w-8 h-8 mr-3 p-1 bg-white/20 rounded-full" />
-        <div>
-          <h2 className="font-semibold text-lg text-white">AI Loan Assistant</h2>
-          <p className="text-blue-100 text-xs">Always here to help</p>
+      <div className="bg-white p-4 text-[#1a1f36] flex items-center shadow-sm border-b border-[#e2e8f0] relative z-10">
+        <div className="p-2 bg-[#f0f4ff] rounded-xl text-[#4f6ef7] mr-3">
+          <Bot className="w-6 h-6" />
+        </div>
+        <div className="flex-1">
+          <h2 className="font-bold text-base text-[#1a1f36] tracking-tight">LoanAdvisor AI</h2>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
+            <span className="text-xs text-[#718096] font-semibold">Online</span>
+          </div>
         </div>
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#f8fafc]">
         <AnimatePresence>
           {messages.map((msg) => (
             <motion.div
               key={msg.id}
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              initial={{ opacity: 0, y: 10, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
               className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div className={`flex max-w-[80%] ${msg.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+              <div className={`flex max-w-[85%] ${msg.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                  msg.sender === 'user' ? 'bg-indigo-500/80 ml-3' :
-                  msg.isError ? 'bg-red-500/40 mr-3' : 'bg-white/20 mr-3'
+                  msg.sender === 'user' ? 'bg-[#e0e7ff] text-[#4f6ef7] ml-2.5' :
+                  msg.isError ? 'bg-[#fee2e2] text-[#ef4444] mr-2.5' : 'bg-[#f0f4ff] text-[#4f6ef7] mr-2.5'
                 }`}>
-                  {msg.sender === 'user' ? <User className="w-5 h-5 text-white" /> :
-                   msg.isError ? <AlertCircle className="w-5 h-5 text-red-200" /> :
-                   <Bot className="w-5 h-5 text-white" />}
+                  {msg.sender === 'user' ? <User className="w-4 h-4" /> :
+                   msg.isError ? <AlertCircle className="w-4 h-4" /> :
+                   <Bot className="w-4 h-4" />}
                 </div>
-                <div className={`p-3 rounded-2xl shadow-sm backdrop-blur-md ${
+                <div className={`p-3 px-4 rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.02)] ${
                   msg.sender === 'user'
-                    ? 'bg-indigo-600/80 text-white rounded-tr-none border border-indigo-400/30'
+                    ? 'bg-[#eef2ff] border border-[#e0e7ff] text-[#1a1f36] rounded-tr-none font-medium'
                     : msg.isError
-                      ? 'bg-red-500/20 border border-red-400/40 text-red-100 rounded-tl-none'
-                      : 'bg-white/80 border border-white/50 text-gray-800 rounded-tl-none'
+                      ? 'bg-[#fff5f5] border-l-4 border-l-[#f56565] border-y border-r border-[#fed7d7] text-[#c53030] rounded-tl-none font-medium'
+                      : 'bg-white border-l-4 border-l-[#4f6ef7] border-y border-r border-[#e2e8f0] text-[#4a5568] rounded-tl-none'
                 }`}>
                   <p className="text-sm leading-relaxed">{msg.text}</p>
                 </div>
@@ -230,11 +235,11 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onComplete, isLoad
               animate={{ opacity: 1 }}
               className="flex justify-start"
             >
-              <div className="flex bg-white/80 backdrop-blur-md p-4 rounded-2xl rounded-tl-none border border-white/50 shadow-sm ml-11">
+              <div className="flex bg-white border border-[#e2e8f0] p-4 rounded-2xl rounded-tl-none shadow-[0_2px_8px_rgba(0,0,0,0.02)] ml-10">
                 <div className="flex space-x-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" />
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+                  <div className="w-2 h-2 bg-[#4f6ef7] rounded-full animate-bounce" />
+                  <div className="w-2 h-2 bg-[#4f6ef7] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                  <div className="w-2 h-2 bg-[#4f6ef7] rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
                 </div>
               </div>
             </motion.div>
@@ -248,14 +253,14 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onComplete, isLoad
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="px-4 pb-2 flex flex-wrap gap-2"
+          className="px-4 py-3 bg-[#f8fafc] flex flex-wrap gap-2 border-t border-[#f1f5f9]"
         >
           {chips.map((chip) => (
             <button
               key={chip}
               type="button"
               onClick={() => handleChipClick(chip)}
-              className="px-4 py-2 text-sm font-medium rounded-full bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/40 hover:scale-105 active:scale-95 transition-all shadow-sm"
+              className="px-4 py-2 text-xs font-semibold rounded-full bg-[#f0f4ff] hover:bg-[#e0e7ff] text-[#4f6ef7] border border-[#dbeafe] hover:scale-[1.02] active:scale-95 transition-all shadow-sm cursor-pointer"
             >
               {chip}
             </button>
@@ -264,20 +269,20 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onComplete, isLoad
       )}
 
       {/* Input Area */}
-      <form onSubmit={handleSend} className="p-4 bg-white/10 backdrop-blur-md border-t border-white/20">
+      <form onSubmit={handleSend} className="p-4 bg-[#f8fafc] border-t border-[#cbd5e1]/30">
         <div className="relative flex items-center">
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isLoading || chatDone}
-            placeholder={isLoading ? "Thinking..." : "Type your answer..."}
-            className="w-full pl-4 pr-12 py-3 rounded-xl border border-white/30 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 transition-all outline-none bg-white/60 focus:bg-white/90 text-gray-900 placeholder-gray-500 disabled:opacity-50 shadow-inner"
+            placeholder={isLoading ? "Analyzing..." : "Type your answer here..."}
+            className="w-full pl-4 pr-12 py-3 rounded-xl border border-[#cbd5e1] focus:border-[#4f6ef7] focus:ring-2 focus:ring-[#4f6ef7]/15 transition-all outline-none bg-white text-[#1a1f36] placeholder-[#94a3b8] disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading || chatDone}
-            className="absolute right-2 p-2 bg-indigo-600/90 hover:bg-indigo-500 text-white rounded-lg disabled:opacity-50 disabled:hover:bg-indigo-600/90 transition-colors shadow-md backdrop-blur-sm"
+            className="absolute right-2 p-2 bg-[#4f6ef7] hover:bg-[#4f6ef7]/90 text-white rounded-lg disabled:opacity-50 transition-colors shadow-sm cursor-pointer"
           >
             <Send className="w-4 h-4" />
           </button>
